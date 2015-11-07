@@ -1,33 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head>
-  <meta charset="utf-8">
-  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<head>
+	<meta charset="utf-8">
+	<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXRz2_3haHo5lhXLODnH5C6neHFM1C-Xs&callback=initMap">
-    </script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXRz2_3haHo5lhXLODnH5C6neHFM1C-Xs&callback=initMap">
+	</script>
 	<script type='text/javascript' src = 'jquery.tmpl.min.js'></script>
 	<script type='text/javascript' src='knockout-3.3.0.js'></script>
-  <script type='text/javascript' src = 'app.js'></script>
-  <link rel="stylesheet" href="style.css">
-  </head>
+	<script type='text/javascript' src = 'app.js'></script>
+	<link rel="stylesheet" href="style.css">
+</head>
 
-  <body>
-  	<p id = "pageTitle">toronto</p>
-    
-      <div id="column">
-        <input class = "searchBar" placeholder="Search location" type="search" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off"><br>
-        <div data-bind="template: {name:'locations', foreach:places}"></div>
-        <script type="text/html" id="locations">
-  		    <div><a class = "listedPlaces" href ="#"><span data-bind="text: title, click: function(){google.maps.event.trigger(this.marker,'click');}"></span></a></div>
-          <br>
-        </script>
-        <button class = 'instructions'>Instructions</button>
-        <div class = 'description'><p>Type your desired location on the box above and see the respective place on the map. By clicking in each item on the list or marker, you can see the most recent picture posted near this location on Instagram. To make a respective marker bounce, just click on an item from the list.</p></div>
-      </div>
+<body>
+	<p id = "pageTitle">toronto</p>
 
-      <div id="map"></div>
-  </body>
+	<div id="column">
+	<input class = "searchBar" placeholder="Search location" type="search" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off"><br>
+	<div data-bind="template: {name:'locations', foreach:places}"></div>
+	<script type="text/html" id="locations">
+		<div><a class = "listedPlaces" href ="#"><span data-bind="text: title, click: function(){google.maps.event.trigger(this.marker,'click');}"></span></a></div>
+	<br>
+	</script>
+	<button class = 'instructions'>Instructions</button>
+	<div class = 'description'><p>Type your desired location on the box above and see the respective place on the map. By clicking in each item on the list or marker, you can see the most recent picture posted near this location on Instagram. To make a respective marker bounce, just click on an item from the list.</p></div>
+	</div>
+
+	<div id="map"></div>
+</body>
 </html>

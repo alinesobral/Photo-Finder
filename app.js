@@ -75,22 +75,22 @@ function initMap() {
 		//creating infoWindow and setting its content
 		google.maps.event.addListener(places[i].marker, 'click', function() {
 			infowindow.setContent(this.contentString);
-    		infowindow.open(mapa, this);
-  		});
+			infowindow.open(mapa, this);
+		});
 	}
 
 	function toggleBounce() {
-  		if (this.getAnimation() !== null) {
-   			this.setAnimation(null);
+		if (this.getAnimation() !== null) {
+			this.setAnimation(null);
 		} else {
 			this.setAnimation(google.maps.Animation.BOUNCE);	
-   		}
+		}
 	}
 
 	$(".description").hide();
 
 	$("button").click(function(){
-    	$(".description").toggle();
+	$(".description").toggle();
 	});
 
 	$(function() {
@@ -128,29 +128,29 @@ function initMap() {
 	var j = 0;
 	var ajaxSequencer = function() {
 		$.ajax({
-  			dataType: "jsonp",
-    		url: instaLinks[j],
-    		corsSupport: true,
-    		//jsonpSupport: true,
-    		success: function(insta) {
-    			places[j].marker.contentString = '<div class="infowindow"><img src="http://files.gandi.ws/gandi19935/image/instagram-icon-logo.png" height="30" width="150"><p>Photo by @' + insta.data[0].user.full_name + 
-    			'</p><a href="'+ insta.data[0].link +'"><img src ="'+ insta.data[0].images.low_resolution.url +'" height="250" width = "250"></a><p>' + 
-    			insta.data[0].caption.text + 
-    			'</p></div>';
-    			j++;
-    			//calling the ajaxsequencer function for each item in instaLinks
-    			if (j<instaLinks.length) {
-    				ajaxSequencer();
-    			}
-    		},
-    		error: function() {
-    			places[j].marker.contentString = 'I\'m sorry, but the data request failed.';
-    			j++;
-    			if (j<instaLinks.length) {
-    				ajaxSequencer();
-    			}
-    		}
-  		});
+			dataType: "jsonp",
+		url: instaLinks[j],
+		corsSupport: true,
+		//jsonpSupport: true,
+		success: function(insta) {
+			places[j].marker.contentString = '<div class="infowindow"><img src="http://files.gandi.ws/gandi19935/image/instagram-icon-logo.png" height="30" width="150"><p>Photo by @' + insta.data[0].user.full_name + 
+			'</p><a href="'+ insta.data[0].link +'"><img src ="'+ insta.data[0].images.low_resolution.url +'" height="250" width = "250"></a><p>' + 
+			insta.data[0].caption.text + 
+			'</p></div>';
+			j++;
+			//calling the ajaxsequencer function for each item in instaLinks
+			if (j<instaLinks.length) {
+				ajaxSequencer();
+			}
+		},
+		error: function() {
+			places[j].marker.contentString = 'I\'m sorry, but the data request failed.';
+			j++;
+			if (j<instaLinks.length) {
+				ajaxSequencer();
+			}
+		}
+		});
 	};
 	ajaxSequencer();
 };
