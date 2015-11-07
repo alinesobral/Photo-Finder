@@ -1,0 +1,52 @@
+html, body { 
+	height: 100%; 
+	margin: 0; 
+	padding: 0;
+	background: #000;
+}
+#map { 
+	position: absolute;
+	right: 0px;
+	height: 80%;
+	width: 70%;
+	float: right;
+}
+#column {
+	float: left;
+}
+.description {
+	font-size: 14px;
+	color: white;
+	text-align: center;
+	width: 300px;
+	margin: 30px;
+}
+a {
+	color: white;
+	text-decoration: none;
+}
+.listedPlaces {
+	border-radius: 5px;
+	padding: 0.5em;
+	margin-left: 40px;
+}
+.searchBar {
+	margin-left: 40px;
+	margin-bottom: 20px;
+	width: 300px;
+}
+#pageTitle {
+	font-size: 50px;
+	font-family: 'Pacifico', cursive;
+	text-align: center;
+	color: white;
+}
+.infowindow {
+	width: 210px;
+}
+.instructions {
+	border-radius: 5px;
+	font-size: 15px;
+	border: solid 1px;
+	margin-left: 40px;
+}
