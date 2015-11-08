@@ -133,9 +133,17 @@ function initMap() {
 		corsSupport: true,
 		//jsonpSupport: true,
 		success: function(insta) {
+			//check if caption or caption.text is null
+			if (insta.data[0].caption !=null) {
+    			if(insta.data[0].caption.text != null) { 
+       			var caption = insta.data[0].caption.text;
+    			} 
+			} else { 
+   				var caption = "";
+			}
 			places[j].marker.contentString = '<div class="infowindow"><img src="http://files.gandi.ws/gandi19935/image/instagram-icon-logo.png" height="30" width="150"><p>Photo by @' + insta.data[0].user.full_name + 
 			'</p><a href="'+ insta.data[0].link +'"><img src ="'+ insta.data[0].images.low_resolution.url +'" height="250" width = "250"></a><p>' + 
-			insta.data[0].caption.text + 
+			caption + 
 			'</p></div>';
 			j++;
 			//calling the ajaxsequencer function for each item in instaLinks
