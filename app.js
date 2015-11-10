@@ -56,6 +56,10 @@ function initMap() {
 	});
 	 
 	var marker, i, j, infoWindow;
+	var setInfoWindow = function () {
+		infowindow.setContent(this.contentString);
+		infowindow.open(mapa, this);
+	};
 	//var markersList = [];
 	var length = places.length;
 	for (i = 0; i < length; i++) {
@@ -63,7 +67,7 @@ function initMap() {
 		//markersList.push(places[i].markers);
 
 		//Create a marker property for each item in the place object, linked to a Google Maps marker
-		 places[i].marker = new google.maps.Marker({
+		places[i].marker = new google.maps.Marker({
 			position: places[i].latLng,
 			map: mapa,
 			title: places[i].title,
@@ -73,16 +77,16 @@ function initMap() {
 		places[i].marker.addListener('click', toggleBounce);
 
 		//creating infoWindow and setting its content
-		google.maps.event.addListener(places[i].marker, 'click', function() {
-			infowindow.setContent(this.contentString);
-			infowindow.open(mapa, this);
-		});
+		google.maps.event.addListener(places[i].marker, 'click', setInfoWindow);
 	}
 
 	function toggleBounce() {
 		if (this.getAnimation() !== null) {
 			this.setAnimation(null);
 		} else {
+			for (var i = 0; i < places.length; i++) {
+				places[i].marker.setAnimation(null);
+			}
 			this.setAnimation(google.maps.Animation.BOUNCE);	
 		}
 	}
@@ -118,14 +122,14 @@ function initMap() {
 	});
 	//create array of links from Instagram's API
 	//each link contains a JSON
-	for (var i = 0; i < places.length; i++) {
+	for (i = 0; i < places.length; i++) {
 		instaLinks.push("https://api.instagram.com/v1/media/search?lat=" + 
 			places[i].latLng.lat+ "&lng=" + places[i].latLng.lng + 
 			"&access_token=219958476.5b2b065.70ccdb0853544c48b7a31676d15e903e");
 	}
 
 	//Using Ajax to manipulate the JSON from each link in instaLinks
-	var j = 0;
+	j = 0;
 	var ajaxSequencer = function() {
 		$.ajax({
 			dataType: "jsonp",
@@ -134,12 +138,13 @@ function initMap() {
 		//jsonpSupport: true,
 		success: function(insta) {
 			//check if caption or caption.text is null
-			if (insta.data[0].caption !=null) {
-    			if(insta.data[0].caption.text != null) { 
-       			var caption = insta.data[0].caption.text;
-    			} 
+			var caption;
+			if (insta.data[0].caption !== null) {
+				if(insta.data[0].caption.text !== null) { 
+					caption = insta.data[0].caption.text;
+				} 
 			} else { 
-   				var caption = "";
+				caption = "";
 			}
 			places[j].marker.contentString = '<div class="infowindow"><img src="http://files.gandi.ws/gandi19935/image/instagram-icon-logo.png" height="30" width="150"><p>Photo by @' + insta.data[0].user.full_name + 
 			'</p><a href="'+ insta.data[0].link +'"><img src ="'+ insta.data[0].images.low_resolution.url +'" height="250" width = "250"></a><p>' + 
@@ -161,6 +166,6 @@ function initMap() {
 		});
 	};
 	ajaxSequencer();
-};
+}
 
 
